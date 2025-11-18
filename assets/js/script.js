@@ -29,30 +29,60 @@ const modalText = document.querySelector("[data-modal-text]");
 
 // modal toggle function
 const testimonialsModalFunc = function () {
-  modalContainer.classList.toggle("active");
-  overlay.classList.toggle("active");
+    modalContainer.classList.toggle("active");
+    overlay.classList.toggle("active");
 }
 
 // add click event to all modal items
 for (let i = 0; i < testimonialsItem.length; i++) {
-
-  testimonialsItem[i].addEventListener("click", function () {
-
-    modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
-    modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
-    modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
-    modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
-
-    testimonialsModalFunc();
-
-  });
-
+    testimonialsItem[i].addEventListener("click", function () {
+        modalImg.src = this.querySelector("[data-testimonials-avatar]").src;
+        modalImg.alt = this.querySelector("[data-testimonials-avatar]").alt;
+        modalTitle.innerHTML = this.querySelector("[data-testimonials-title]").innerHTML;
+        modalText.innerHTML = this.querySelector("[data-testimonials-text]").innerHTML;
+        testimonialsModalFunc();
+    });
 }
+
 
 // add click event to modal close button
 modalCloseBtn.addEventListener("click", testimonialsModalFunc);
 overlay.addEventListener("click", testimonialsModalFunc);
 
+////////////////////////////////////////
+
+// testimonials variables
+const profileItem = document.querySelectorAll("[data-profile-item]");
+const profileModalContainer = document.querySelector("[data-profile-modal-container]");
+const profileModalCloseBtn = document.querySelector("[data-profile-modal-close-btn]");
+const profileOverlay = document.querySelector("[data-profile-overlay]");
+
+// modal variable
+const profileModalImg = document.querySelector("[data-profile-modal-img]");
+const profileModalTitle = document.querySelector("[data-profile-modal-title]");
+const profileModalText = document.querySelector("[data-profile-modal-text]");
+
+const profileModalFunc = function () {
+    profileModalContainer.classList.toggle("active");
+    profileOverlay.classList.toggle("active");
+}
+
+// add click event to all modal items
+for (let i = 0; i < profileItem.length; i++) {
+    profileItem[i].addEventListener("click", function () {
+        profileModalImg.src = this.querySelector("[data-profile-avatar]").src;
+        profileModalImg.alt = this.querySelector("[data-profile-avatar]").alt;
+        profileModalTitle.innerHTML = this.querySelector("[data-profile-title]").innerHTML;
+        profileModalText.innerHTML = this.querySelector("[data-profile-text]").innerHTML;
+        profileModalFunc();
+    });
+}
+
+// add click event to modal close button
+profileModalCloseBtn.addEventListener("click", profileModalFunc);
+profileOverlay.addEventListener("click", profileModalFunc);
+
+////////////////////////////////////////
 
 
 // custom select variables
@@ -65,52 +95,41 @@ select.addEventListener("click", function () { elementToggleFunc(this); });
 
 // add event in all select items
 for (let i = 0; i < selectItems.length; i++) {
-  selectItems[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    elementToggleFunc(select);
-    filterFunc(selectedValue);
-
-  });
+    selectItems[i].addEventListener("click", function () {
+        let selectedValue = this.innerText.toLowerCase();
+        selectValue.innerText = this.innerText;
+        elementToggleFunc(select);
+        filterFunc(selectedValue);
+    });
 }
 
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
 const filterFunc = function (selectedValue) {
-
-  for (let i = 0; i < filterItems.length; i++) {
-
-    if (selectedValue === "all") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
-      filterItems[i].classList.add("active");
-    } else {
-      filterItems[i].classList.remove("active");
+    for (let i = 0; i < filterItems.length; i++) {
+        if (selectedValue === "all") {
+            filterItems[i].classList.add("active");
+        } else if (selectedValue === filterItems[i].dataset.category) {
+            filterItems[i].classList.add("active");
+        } else {
+            filterItems[i].classList.remove("active");
+        }
     }
-
-  }
-
 }
 
 // add event in all filter button items for large screen
 let lastClickedBtn = filterBtn[0];
 
 for (let i = 0; i < filterBtn.length; i++) {
-
-  filterBtn[i].addEventListener("click", function () {
-
-    let selectedValue = this.innerText.toLowerCase();
-    selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
-
-    lastClickedBtn.classList.remove("active");
-    this.classList.add("active");
-    lastClickedBtn = this;
-
-  });
-
+    filterBtn[i].addEventListener("click", function () {
+        let selectedValue = this.innerText.toLowerCase();
+        selectValue.innerText = this.innerText;
+        filterFunc(selectedValue);
+        lastClickedBtn.classList.remove("active");
+        this.classList.add("active");
+        lastClickedBtn = this;
+    });
 }
 
 
@@ -122,16 +141,14 @@ const formBtn = document.querySelector("[data-form-btn]");
 
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
-  formInputs[i].addEventListener("input", function () {
-
-    // check form validation
-    if (form.checkValidity()) {
-      formBtn.removeAttribute("disabled");
-    } else {
-      formBtn.setAttribute("disabled", "");
-    }
-
-  });
+    formInputs[i].addEventListener("input", function () {
+        // check form validation
+        if (form.checkValidity()) {
+            formBtn.removeAttribute("disabled");
+        } else {
+            formBtn.setAttribute("disabled", "");
+        }
+    });
 }
 
 
@@ -142,20 +159,18 @@ const pages = document.querySelectorAll("[data-page]");
 
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
-  navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
-      }
-    }
-
-  });
+    navigationLinks[i].addEventListener("click", function () {
+        for (let i = 0; i < pages.length; i++) {
+            if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
+                pages[i].classList.add("active");
+                navigationLinks[i].classList.add("active");
+                window.scrollTo(0, 0);
+            } else {
+                pages[i].classList.remove("active");
+                navigationLinks[i].classList.remove("active");
+            }
+        }
+    });
 }
 
 
@@ -163,15 +178,8 @@ const copyTrack = {}
 
 function clickCopy(name, text) {
     copyTrack[name] = (copyTrack[name] ?? 0) + 1
-
     navigator.clipboard.writeText(text)
-    
     const tooltip = document.getElementById(`${name}-tooltip`)
-    // let copyMessage = `Copied!`;
-    // if(copyTrack[name] > 1) {
-    //     copyMessage = `Copied! ${copyTrack[name]}x</p><p>${text}</p>`;
-    // }
-    // tooltip.innerHTML = copyMessage
     tooltip.innerHTML = (copyTrack[name] > 1)
     ? `Copied! ${copyTrack[name]}x`
     : `Copied!  `;
